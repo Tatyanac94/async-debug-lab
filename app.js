@@ -1,10 +1,12 @@
 document.getElementById("fetch-user").addEventListener("click", () => {
   fetch("https://randomuser.me/api/") // Question 1: Why does this fetch call fail? 
-  //The API endpoint is not available. The url leads to a page that displays 'Not Found'.
+  //The fetch call fails because there is a typo in the url.
+  //This makes the API endpoint unavailable. The url leads to a page that displays 'Not Found'.
   .then((res) => res.json())
     .then((data) => {
       displayUser(data.results[0]); // Question 2: Why is data.results undefined? 
-      //Because the response from the fetch request needs to be converted to JSON format before it can be used.
+      //Data.results is undefined because the response from the fetch request 
+      //needs to be converted to JSON format before it will display the user's data.
     })
     .catch((error) => console.error("Fetch error:", error));
 });
@@ -19,6 +21,8 @@ function displayUser(user) {
 }
 
 // Question 4: Why does this API call fail?
+//The API call is failing because it's unreachable. 
+//This is just a placeholder example url that leads to an unreachable site.
 fetch("https://api.example.com/data")
   .then((response) => response.json())
   .catch((error) => {
@@ -32,9 +36,10 @@ function fetchNews() {
     .then((articles) => {
       const container = document.getElementById("news-container");
       // Question 5: Why do the article titles not appear on the screen?
+      //The article title should be accessed with the 'title' property instead of the 'name' property.
       articles.forEach((article) => {
         const p = document.createElement("p");
-        p.textContent = article.name;
+        p.textContent = article.title;
         container.appendChild(p);
       });
     })
