@@ -1,15 +1,20 @@
-document.getElementById("fetch-user").addEventListener("click", function () {
-  fetch("https://randomuser.me/apii/") // Question 1: Why does this fetch call fail?
+document.getElementById("fetch-user").addEventListener("click", () => {
+  fetch("https://randomuser.me/api/") // Question 1: Why does this fetch call fail? 
+  //The API endpoint is not available. The url leads to a page that displays 'Not Found'.
+  .then((res) => res.json())
     .then((data) => {
-      displayUser(data.results[0]); // Question 2: Why is data.results undefined?
+      displayUser(data.results[0]); // Question 2: Why is data.results undefined? 
+      //Because the response from the fetch request needs to be converted to JSON format before it can be used.
     })
     .catch((error) => console.error("Fetch error:", error));
 });
 
 function displayUser(user) {
-  const userInfoDiv = document.getElementById("user-info");
+  const userInfoDiv = document.getElementById('user-info');
   // Question 3: Why isn't the user's name displaying correctly?
-  userInfoDiv.innerHTML = `Name: ${user.first} ${user.name}<br>
+  // Because the user.name is not defined. 
+  //User is an object that should contain a name or email property then it can be accessed.
+  userInfoDiv.innerHTML = `Name: ${user.name.first} ${user.name.last}<br>
                            Email: ${user.email}`;
 }
 
